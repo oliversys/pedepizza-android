@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.oliverapps.pedepizza" >
+
+    <permission
+        android:name="br.com.oliverapps.pedepizza.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="br.com.oliverapps.pedepizza.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="6.5" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.oliverapps.pedepizza.MainActivity" />
+        </activity>
+
+        <service android:name=".GCMIntentService" />
+
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="br.com.oliverapps.pedepizza" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="br.com.oliverapps.pedepizza" />
+            </intent-filter>
+        </receiver>
+
+        <!-- created by ADT ext plugin at 2015-02-22 07:39:40 -->
+        <activity android:name=".PizzariasActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.oliverapps.pedepizza.MainActivity" />
+        </activity>
+        <!-- created by ADT ext plugin at 2015-02-22 07:40:34 -->
+        <activity android:name=".MenuResumidoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.oliverapps.pedepizza.MainActivity" />
+        </activity>
+        <!-- created by ADT ext plugin at 2015-02-22 07:41:24 -->
+        <activity android:name=".MenuCompletoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.oliverapps.pedepizza.MenuResumidoActivity" />
+        </activity>
+        <activity
+            android:name=".PedidoActivity"
+            android:label="@string/title_activity_pedido"
+            android:parentActivityName=".MenuCompletoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.oliverapps.pedepizza.MenuCompletoActivity" />
+        </activity>
+        <activity
+            android:name=".IngredientesActivity"
+            android:label="@string/title_activity_ingredientes"
+            android:parentActivityName=".PedidoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.oliverapps.pedepizza.PedidoActivity" />
+        </activity>
+    </application>
+
+</manifest>

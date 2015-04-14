@@ -1,0 +1,68 @@
+   <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/row_background2"
+          android:paddingTop="0dip" android:layout_gravity="top">
+           
+        <TableRow>            
+            <LinearLayout 
+                  android:layout_width="80dp"
+                  android:layout_height="80dp"
+                  android:layout_gravity="center_vertical">
+                
+                <com.android.volley.toolbox.NetworkImageView
+			        android:layout_width="100dp"
+			        android:layout_height="100dp"
+			        android:scaleType="centerCrop"
+			        android:id="@+id/logoPizzaria"/>              	              	
+            </LinearLayout>
+              
+	  		<TableLayout
+	          android:layout_width="fill_parent"
+	          android:layout_height="wrap_content"
+	          android:paddingTop="0dip" android:layout_gravity="top">
+
+	 			   <TableRow>
+	                 <TextView
+	                    android:id="@+id/nomePizzaria"
+	                    android:layout_height="wrap_content"
+	                    android:layout_width="wrap_content"	                    
+	                    android:textSize="22sp"
+	                    android:textColor="#f0982b"
+	                    android:layout_marginRight="10dip"
+	                    android:layout_marginLeft="10dip"	                    
+	                    android:gravity="start"
+	                    android:textStyle="bold"/>
+	              </TableRow>
+	              <TableRow android:layout_gravity="start">          
+	                 <TextView
+	                    android:id="@+id/distancia"
+	                    style="@style/texto_lista_pizzarias"/>
+	              </TableRow>	              
+	              <TableRow android:layout_gravity="start">          
+	                 <TextView
+	                    android:id="@+id/precoPizza"	                    
+						style="@style/texto_lista_pizzarias"/>
+	              </TableRow>	            
+	              <TableRow android:layout_gravity="start"> 
+	                <TextView
+	                    android:id="@+id/taxaEntrega"
+	                    style="@style/texto_lista_pizzarias"/>
+	              </TableRow>
+	              <TableRow android:layout_gravity="start">
+	                 <TextView
+	                    android:id="@+id/tempoEntrega"	
+						style="@style/texto_lista_pizzarias"/>
+	              </TableRow>	              
+	            </TableLayout>	                      
+	  			  
+	  			<RatingBar
+	  			      android:id="@+id/barra_avaliacao"
+	  			      style="@style/ratingbar_pequena"
+	  			      android:contentDescription="@string/barra_avaliacao" 
+	                  android:layout_height="wrap_content"
+	                  android:layout_width="wrap_content"
+	                  android:layout_gravity="center_vertical|start"	                  
+	                  android:numStars="5"/>
+       </TableRow>
+</TableLayout>
