@@ -1,6 +1,8 @@
 package br.com.oliverapps.pedepizza.jersey.client.volley;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.util.LruCache;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -8,6 +10,7 @@ import com.android.volley.toolbox.ImageLoader;
 /**
  * Created by 30258767863 on 02/03/15.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 public class BitmapLruCache extends LruCache<String,Bitmap> implements ImageLoader.ImageCache{
     static int getMaxCacheSize() {
         int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);

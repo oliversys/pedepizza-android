@@ -17,24 +17,24 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
+import br.com.oliverapps.pedepizza.PizzariaRow;
 import br.com.oliverapps.pedepizza.PizzariasActivity;
-import br.com.oliverapps.pedepizza.bean.entity.Pizzaria;
+import br.com.oliverapps.pedepizza.jersey.client.AppController;
 import br.com.oliverapps.pedepizza.jersey.client.volley.BitmapLruCache;
-import br.com.oliverapps.pedepizza.jersey.client.volley.VolleyAPIApplication;
 
 import static br.com.oliverapps.pedepizza.R.id;
 import static br.com.oliverapps.pedepizza.R.layout;
 
-public class PizzariaCustomAdapter extends ArrayAdapter<Pizzaria> implements OnClickListener {
+public class PizzariaCustomAdapter extends ArrayAdapter<PizzariaRow> implements OnClickListener {
 
 	private ImageLoader imgLoader;
 	private Activity activity;
     private static LayoutInflater inflater;
-    private List<Pizzaria> itensDaLista;
+    private List<PizzariaRow> itensDaLista;
     public Resources res;
     int i=0;
     
-    public PizzariaCustomAdapter(Activity actv,List<Pizzaria> itens,Resources resLocal) {
+    public PizzariaCustomAdapter(Activity actv,List<PizzariaRow> itens,Resources resLocal) {
     	super(actv, layout.pizzarias_row);
     	
     	this.activity = actv;
@@ -42,13 +42,15 @@ public class PizzariaCustomAdapter extends ArrayAdapter<Pizzaria> implements OnC
     	this.res = resLocal;    	
     	this.inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-// JsonRequest exclusivo para imagens (logos de pizzarias)    	
-    	imgLoader = new ImageLoader(VolleyAPIApplication.getInstance().getRequestQueue(), new BitmapLruCache());    	
+        try {
+// Request exclusivo para imagens (logos de pizzarias)
+            imgLoader = new ImageLoader(AppController.getInstance().getRequestQueue(), new BitmapLruCache());
+        }catch (Throwable t){ t.printStackTrace();}
 	}
     
-    public void swapRecords(List<Pizzaria> objects) {
+    public void swapRecords(List<PizzariaRow> objects) {
         super.clear();
-        for(Pizzaria obj : objects) {
+        for(PizzariaRow obj : objects) {
             super.add(obj);
         }    
     	super.notifyDataSetChanged();
@@ -65,15 +67,15 @@ public class PizzariaCustomAdapter extends ArrayAdapter<Pizzaria> implements OnC
             row = LayoutInflater.from(getContext())
                  .inflate(layout.pizzarias_row, parent, false);
         }
-        
-        Pizzaria tempValues = getItem(position);
+
+        PizzariaRow tempValues = getItem(position);
         View pizzariasRow = row;
         ViewHolder holder = new ViewHolder();
         
 		row.setTag(holder);
 
         // atribui os controles da tela ao HOLDER
-        if(pizzariasRow == null){             
+        if(tempValues == null){
 /****** Inflate tabitem.xml file for each row ( Defined below ) *******/
             holder.nome = (TextView) row.findViewById(id.nomePizzaria);
             holder.distancia = (TextView)row.findViewById(id.distancia);
@@ -101,16 +103,16 @@ public class PizzariaCustomAdapter extends ArrayAdapter<Pizzaria> implements OnC
             tempValues = itensDaLista.get(position);
              
 // atribui os valores informados pelo usuario aos controles do HOLDER
-             holder.nome.setText(tempValues.getNome());
-             holder.distancia.setText(tempValues.getDistanciaEmMetros().toString());
-             holder.precoMinCardapio.setText(tempValues.getCardapios().get(0).getPrecoMinimo().toString());
-             holder.taxaEntrega.setText(tempValues.getTaxaEntrega().toString());
-             holder.tempoMedioEntrega.setText(tempValues.getTempoMedioEntregaEmMinutos().toString());
+             holder.nome.setText(tempValues.nome);
+             holder.distancia.setText(tempValues.distancia);
+             holder.precoMinCardapio.setText(tempValues.precoMinimo);
+             holder.taxaEntrega.setText(tempValues.taxaEntrega);
+             holder.tempoMedioEntrega.setText(tempValues.tempoMedioEntrega);
 
 // atribui a URL da imagem do logo da pizzaria armazenada no servidor ao Holder             
-             holder.logoPizzaria.setImageUrl(tempValues.getLogoURL(),imgLoader);
+             holder.logoPizzaria.setImageUrl(tempValues.logoPizzaria,imgLoader);
              
-             holder.avaliacao.setRating(tempValues.getLikeRatio().floatValue());
+             holder.avaliacao.setRating(new Float(tempValues.avaliacao));
 /******** Set Item Click Listner for LayoutInflater for each row *******/
 
              pizzariasRow.setOnClickListener(new OnItemClickListener(position));

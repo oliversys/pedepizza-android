@@ -1,9 +1,13 @@
 package br.com.oliverapps.pedepizza.jersey.client;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.util.LruCache;
+
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 	 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 public class LruBitmapCache extends LruCache<String, Bitmap> implements ImageCache {
 	
 	public static int getDefaultLruCacheSize() {

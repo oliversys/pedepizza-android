@@ -12,8 +12,8 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 
 import java.util.ArrayList;
 
+import br.com.oliverapps.pedepizza.bean.entity.Cardapio;
 import br.com.oliverapps.pedepizza.customlistviewadapter.CardapioCustomAdapter;
-import br.com.oliverapps.pedepizza.customlistviewadapter.CardapioListModel;
 
 /**
  * @author William
@@ -23,7 +23,7 @@ public class MenuCompletoActivity extends ListActivity {
 
 	private ListView listViewPizzarias;
 	private CardapioCustomAdapter adapter;
-	private ArrayList<CardapioListModel> listaPizzas = new ArrayList<CardapioListModel>();
+	private ArrayList<Cardapio> listaPizzas = new ArrayList<Cardapio>();
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
