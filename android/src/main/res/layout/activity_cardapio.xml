@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button android:id="@+id/menuCompleto"
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton.Overflow"
+        android:background="@color/material_deep_teal_200"
+        android:text="@string/menu_completo"
+        android:layout_marginTop="25px"
+        android:layout_marginBottom="25px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30px"
+        android:textStyle="bold"
+        android:layout_column="10" />
+
+    <TextView
+        android:padding="12dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/maisPedidas"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@color/background_floating_material_dark"
+        android:text="@string/mais_pedidas"/>
+
+    <!-- FOTOS DAS PIZZAS MAIS PEDIDAS -->
+    <ViewFlipper
+        android:id="@+id/menuFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inAnimation="@android:anim/slide_in_left"
+        android:outAnimation="@android:anim/slide_out_right">
+        <ListView
+            android:id="@+id/pizzasMaisPedidas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ViewFlipper>
+
+    <!-- PIZZAS PROMOCIONAIS -->
+    <TextView
+        android:padding="12dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/categoriaPromocional"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@color/background_floating_material_dark"
+            android:text="@string/promocionais"/>
+
+    <ListView
+        android:id="@+id/pizzasPromocionais"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

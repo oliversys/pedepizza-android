@@ -1,7 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</ListView>
+    <ProgressBar
+        android:id="@+id/progressBarMenuCompleto"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <!-- PIZZAS TRADICIONAIS, ESPECIAIS, DOCES -->
+    <TextView
+        android:padding="12dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/maisPedidas"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@color/background_floating_material_dark"
+        android:text="@string/doces"/>
+
+    <ListView
+    android:id="@+id/pizzasTradicionais"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+    <TextView
+        android:padding="12dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/categoriaEspecial"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@color/background_floating_material_dark"
+        android:text="@string/especiais"/>
+
+    <ListView
+        android:id="@+id/pizzasEspeciais"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:padding="12dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/categoriaDoce"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@color/background_floating_material_dark"
+        android:text="@string/doces"/>
+
+    <ListView
+        android:id="@+id/pizzasDoces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

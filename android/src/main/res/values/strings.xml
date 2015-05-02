@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- CARDAPIO -->
+    <string name="menu_completo">Menu Completo</string>
+    <string name="promocionais">Promocionais</string>
+    <string name="mais_pedidas">Mais Pedidas</string>
+    <string name="especiais">Especiais</string>
+    <string name="doces">Doces</string>
+
     <string name="app_name">Pede Pizza</string>
-    <string name="title_section3">Section 3</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section1">Section 1</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Configuracoes</string>
     <string name="logo_pizzaria">Logo da Pizzaria</string>
     <string name="barra_avaliacao">Barra de Avaliacao</string>

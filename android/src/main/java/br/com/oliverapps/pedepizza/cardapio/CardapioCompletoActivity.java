@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.oliverapps.pedepizza;
+package br.com.oliverapps.pedepizza.cardapio;
 
 import android.app.ListActivity;
 import android.os.Bundle;
@@ -12,17 +12,18 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 
 import java.util.ArrayList;
 
+import br.com.oliverapps.pedepizza.R;
 import br.com.oliverapps.pedepizza.bean.entity.Cardapio;
-import br.com.oliverapps.pedepizza.customlistviewadapter.CardapioCustomAdapter;
+import br.com.oliverapps.pedepizza.customlistviewadapter.ViewFlipperAdapter;
 
 /**
  * @author William
  *
  */
-public class MenuCompletoActivity extends ListActivity {
+public class CardapioCompletoActivity extends ListActivity {
 
 	private ListView listViewPizzarias;
-	private CardapioCustomAdapter adapter;
+	private ViewFlipperAdapter adapter;
 	private ArrayList<Cardapio> listaPizzas = new ArrayList<Cardapio>();
 	
 	@Override

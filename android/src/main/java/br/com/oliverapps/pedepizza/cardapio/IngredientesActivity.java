@@ -1,23 +1,25 @@
-package br.com.oliverapps.pedepizza;
+package br.com.oliverapps.pedepizza.cardapio;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class PedidoActivity extends ActionBarActivity {
+import br.com.oliverapps.pedepizza.R;
+
+public class IngredientesActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pedido);
+        setContentView(R.layout.activity_ingredientes);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.pedido, menu);
+        getMenuInflater().inflate(R.menu.ingredientes, menu);
         return true;
     }
 

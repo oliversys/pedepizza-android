@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import br.com.oliverapps.pedepizza.pizzaria.PizzariasActivity;
+
 
 public class MainActivity extends Activity{
 	
