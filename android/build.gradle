@@ -5,6 +5,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.0'
+
     }
 }
 repositories {
@@ -18,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId "br.com.oliverapps.pedepizza.android"
-        minSdkVersion 8
+        minSdkVersion 11
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -42,13 +43,22 @@ task wrapper(type: Wrapper) {
 android {
     packagingOptions {
         exclude 'LICENSE.txt'
+        exclude 'persistence.xml'
     }
 }
 
 dependencies {
 //    compile 'javax.validation:validation-api:1.1.0.Final'
-    compile project(':volley')
+    compile project(':volleyadapter')
     compile 'br.com.oliverapps:pedepizza-bean:0.0.1-SNAPSHOT'
     compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:cardview-v7:21.0.+'
+    compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.android.support:support-v4:22.0.0'
+
+    compile 'com.google.android.gms:play-services-identity:7.3.0'
+    compile 'com.google.android.gms:play-services-location:7.3.0'
+    compile 'com.google.android.gms:play-services-wallet:7.3.0'
+
+    compile 'com.afollestad:material-dialogs:0.7.3.4' // progress dialog e alert dialogs
 }

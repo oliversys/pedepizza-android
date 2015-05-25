@@ -1,11 +1,32 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="br.com.oliverapps.pedepizza.pedido.PedidoActivity">
 
-</RelativeLayout>
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="257dp"
+        android:id="@+id/list"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalPedido"
+        android:textSize="28sp"
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton.Overflow"
+        android:background="@color/material_deep_teal_200"
+        android:padding="15dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/finalizar"
+        android:layout_gravity="bottom"
+        android:text="@string/finalizar"
+        android:padding="15dp"/>
+
+</LinearLayout>

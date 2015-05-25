@@ -4,53 +4,57 @@
 package br.com.oliverapps.pedepizza.cardapio;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.ViewFlipper;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.oliverapps.pedepizza.Constants;
+import br.com.oliverapps.pedepizza.IPedePizzaActivity;
 import br.com.oliverapps.pedepizza.R;
-import br.com.oliverapps.pedepizza.br.com.oliverapps.pedepizza.vo.CardapioRow;
-import br.com.oliverapps.pedepizza.customlistviewadapter.CardapioListViewAdapter;
-import br.com.oliverapps.pedepizza.customlistviewadapter.ViewFlipperAdapter;
+import br.com.oliverapps.pedepizza.pedido.PedidoActivity;
+import br.com.oliverapps.pedepizza.util.Utils;
+import br.com.oliverapps.pedepizza.valueobject.CardapioRow;
+import br.com.oliversys.mobilecommons.volleyjerseyclient.AppController;
+import br.com.oliversys.mobilecommons.volleyjerseyclient.ISwappableView;
 
 /**
  * @author William
  *
  */
-public class CardapioResumidoActivity extends Activity {
+public class CardapioResumidoActivity extends Activity implements IPedePizzaActivity {
 
-    /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
-     */
     private ViewPager mPager;
-    /**
-     * The pager adapter, which provides the pages to the view pager widget.
-     */
     private PagerAdapter mPagerAdapter;
 
-    private static final String DNS = "192.168.0.14:8080"; // CASA
-    //  private static final String DNS = "10.29.53.150:8080"; // SERPRO
-//    private static final String DNS = "192.168.43.41:8080"; // DNS com roteamento android
-    //private static final String DNS = "localhost:3000";
-    public static final String URL_GET_CARDAPIO_JSON = "http://" + DNS + "/pedepizza-backend/rest/cardapio/";
+    public static final String URL_GET_CARDAPIO_JSON = Constants.DNS_CASA + "/pedepizza-backend/rest/cardapio/";
 
     private ListView listaMaisPedidas;
     private ListView listaPromocionais;
 
     private List<CardapioRow> pizzasPromocionais = new ArrayList<CardapioRow>();
-    private CardapioListViewAdapter adapter;
-    private ProgressBar bar;
+    private ISwappableView adapter;
+    private ViewFlipperAdapter flipperAdapter;
+//    private ProgressBar bar;
+    private Dialog progress;
+
+    private String idCardapio;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_cardapio);
 
         ViewFlipper flipper = (ViewFlipper) findViewById(R.id.menuFlipper);
@@ -58,32 +62,46 @@ public class CardapioResumidoActivity extends Activity {
         flipper.setOutAnimation(this, R.anim.abc_shrink_fade_out_from_bottom);
         flipper.setFlipInterval(1000);
 
-        String idPizzaria = getIntent().getStringExtra("idPizzaria");
-
         listaMaisPedidas = (ListView) findViewById(R.id.pizzasMaisPedidas);
+        flipperAdapter = new ViewFlipperAdapter(this);
+        listaMaisPedidas.setAdapter(flipperAdapter);
+
+        idCardapio = getIntent().getStringExtra("idCardapio");
+
         listaPromocionais = (ListView) findViewById(R.id.pizzasPromocionais);
-        bar = (ProgressBar) findViewById(R.id.progressBar1);
+//        bar = (ProgressBar) findViewById(R.id.progressBar2);
+//        bar.setVisibility(View.VISIBLE);
+        progress = Utils.showProgressDialog(this);
 
-        listaMaisPedidas.setAdapter(new ViewFlipperAdapter(this));
-        listaPromocionais.setAdapter(new CardapioListViewAdapter(this,pizzasPromocionais));
+        adapter = new CardapioListViewAdapter(this,pizzasPromocionais);
+        listaPromocionais.setAdapter((ListAdapter) adapter);
 
-        fetchCardapio(URL_GET_CARDAPIO_JSON + idPizzaria);
+        Button completo = (Button)findViewById(R.id.menuCompleto);
+        completo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CardapioResumidoActivity.this, CardapioCompletoActivity.class);
+                i.putExtra("idCardapio",idCardapio);
+                startActivity(i);
+            }
+        });
+
+        fetchCardapio();
 	}
 
-    private void fetchCardapio(String uri){
-       // AppController.getInstance().doJsonRequest(adapter, this, bar, new CardapioRow(),URL_GET_CARDAPIO_JSON);
+    private void fetchCardapio(){
+       AppController.getInstance().doJsonRequest(adapter, this, progress,
+               new CardapioRow(),URL_GET_CARDAPIO_JSON + idCardapio + "/PROMOCIONAL" );
     }
 
     public void onItemClick(int pos){
-//        CardapioRow pizzaSelecionada = (CardapioRow) adapter.getItem(pos);//
-//        Gson gson = new Gson();
-//        String json = gson.toJson(pizzaSelecionada);
-//
-//        Intent i = new Intent(CardapioResumidoActivity.this, PedidoActivity.class);
-//        i.putExtra("pizza",json);
-//        startActivity(i);
+        CardapioRow pizzaSelecionada = (CardapioRow) ((ListAdapter)adapter).getItem(pos);//
+        Gson gson = new Gson();
+        String json = gson.toJson(pizzaSelecionada);
 
-//        Toast.makeText(this.getApplicationContext(), pizzaSelecionada.getNomePizza(), Toast.LENGTH_LONG);
+        Intent i = new Intent(CardapioResumidoActivity.this, PedidoActivity.class);
+        i.putExtra("pizza", json);
+        startActivity(i);
     }
 
 }

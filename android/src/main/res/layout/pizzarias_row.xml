@@ -1,7 +1,7 @@
-   <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
-          android:background="@android:color/white"
+          android:background="@drawable/selector"
           android:paddingTop="0dip" android:layout_gravity="top">
            
         <TableRow>
@@ -52,7 +52,8 @@
 						  android:layout_height="wrap_content"
 						  android:layout_width="wrap_content"
 						  android:layout_gravity="center_vertical|start"
-						  android:numStars="5"/>
+						  android:numStars="5"
+						  android:isIndicator="true"/>
 				  </TableRow>
 				  <TableRow android:layout_gravity="start">
 					<TextView
